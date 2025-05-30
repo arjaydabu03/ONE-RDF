@@ -163,6 +163,6 @@ class AccountController extends Controller
         $user->update([
             "password" => Hash::make($request["password"]),
         ]);
-        return $this->responseSuccess("Password has been change.");
+        return $this->responseSuccess("Password has been changed.");
     }
 }
