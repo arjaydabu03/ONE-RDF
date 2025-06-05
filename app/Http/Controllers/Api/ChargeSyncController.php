@@ -116,8 +116,9 @@ class ChargeSyncController extends Controller
             "sub_unit",
             "location"
         )->get();
+
         foreach ($charging as $charging_sync) {
-            $sync = Http::withToken($system->token)->post($system->url_holder, [
+            $payload[] = [
                 "sync_id" => $charging_sync->id,
                 "code" => $charging_sync->code,
                 "name" => $charging_sync->name,
@@ -140,11 +141,16 @@ class ChargeSyncController extends Controller
                 "location_code" => $charging_sync->location->code,
                 "location_name" => $charging_sync->location->name,
                 "deleted_at" => $charging_sync->deleted_at,
-            ]);
+            ];
+        }
 
-            if ($sync->failed()) {
-                return $this->responseConflictError(ResponseMessage::SERVER);
-            }
+        $sync = Http::withToken($system->token)->post(
+            $system->url_holder,
+            $payload
+        );
+
+        if ($sync->failed()) {
+            return $this->responseConflictError(ResponseMessage::SERVER);
         }
 
         return $this->responseCreated(ResponseMessage::SYNC);
