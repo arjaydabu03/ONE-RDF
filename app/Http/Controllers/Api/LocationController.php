@@ -34,6 +34,23 @@ class LocationController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $ocation);
     }
+    public function location(StatusRequest $request)
+    {
+        $status = $request->status;
+        $ocation = Location::when($status === "inactive", function (
+            $query
+        ) use ($status) {
+            return $query->onlyTrashed();
+        })
+            ->useFilters()
+            ->dynamicPaginate();
+
+        if ($ocation->isEmpty()) {
+            return $this->responseNotFound("Nothing to display.");
+        }
+
+        return $this->responseSuccess(ResponseMessage::DISPLAY, $ocation);
+    }
     public function show($id)
     {
         $ocation = Location::find($id);

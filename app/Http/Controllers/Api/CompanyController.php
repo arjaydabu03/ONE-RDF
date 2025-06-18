@@ -39,6 +39,27 @@ class CompanyController extends Controller
         // }
         return $this->responseSuccess(ResponseMessage::DISPLAY, $companies);
     }
+    public function companies(StatusRequest $request)
+    {
+        $status = $request->status;
+
+        $companies = Company::when($status === "inactive", function (
+            $query
+        ) use ($status) {
+            return $query->onlyTrashed();
+        })
+            ->useFilters()
+            ->dynamicPaginate();
+
+        if ($companies->isEmpty()) {
+            return $this->responseNotFound("Nothing to display.");
+        }
+
+        // foreach (Company::lazy() as $companies) {
+        //     $companies = Company::get();
+        // }
+        return $this->responseSuccess(ResponseMessage::DISPLAY, $companies);
+    }
     public function show($id)
     {
         $company = Company::find($id);

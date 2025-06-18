@@ -35,6 +35,27 @@ class DepartmentUnitController extends Controller
             $department_unit
         );
     }
+    public function department_unit(StatusRequest $request)
+    {
+        $status = $request->status;
+        $department_unit = DepartmentUnit::when(
+            $status === "inactive",
+            function ($query) use ($status) {
+                return $query->onlyTrashed();
+            }
+        )
+            ->useFilters()
+            ->dynamicPaginate();
+
+        if ($department_unit->isEmpty()) {
+            return $this->responseNotFound("Nothing to display.");
+        }
+
+        return $this->responseSuccess(
+            ResponseMessage::DISPLAY,
+            $department_unit
+        );
+    }
     public function show($id)
     {
         $department_unit = DepartmentUnit::find($id);

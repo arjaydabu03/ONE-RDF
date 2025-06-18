@@ -34,6 +34,23 @@ class BusinessUnitController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $business_unit);
     }
+    public function business_unit(StatusRequest $request)
+    {
+        $status = $request->status;
+        $business_unit = BusinessUnit::when($status === "inactive", function (
+            $query
+        ) use ($status) {
+            return $query->onlyTrashed();
+        })
+            ->useFilters()
+            ->dynamicPaginate();
+
+        if ($business_unit->isEmpty()) {
+            return $this->responseNotFound("Nothing to display.");
+        }
+
+        return $this->responseSuccess(ResponseMessage::DISPLAY, $business_unit);
+    }
     public function show($id)
     {
         $business_unit = BusinessUnit::find($id);

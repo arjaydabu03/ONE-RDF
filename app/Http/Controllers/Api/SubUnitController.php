@@ -31,6 +31,23 @@ class SubUnitController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $sub_unit);
     }
+    public function sub_unit(StatusRequest $request)
+    {
+        $status = $request->status;
+        $sub_unit = SubUnit::when($status === "inactive", function (
+            $query
+        ) use ($status) {
+            return $query->onlyTrashed();
+        })
+            ->useFilters()
+            ->dynamicPaginate();
+
+        if ($sub_unit->isEmpty()) {
+            return $this->responseNotFound("Nothing to display.");
+        }
+
+        return $this->responseSuccess(ResponseMessage::DISPLAY, $sub_unit);
+    }
     public function show($id)
     {
         $sub_unit = SubUnit::find($id);

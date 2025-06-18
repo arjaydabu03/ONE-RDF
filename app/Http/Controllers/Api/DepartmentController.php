@@ -32,6 +32,23 @@ class DepartmentController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $department);
     }
+    public function departments(StatusRequest $request)
+    {
+        $status = $request->status;
+        $department = Department::when($status === "inactive", function (
+            $query
+        ) use ($status) {
+            return $query->onlyTrashed();
+        })
+            ->useFilters()
+            ->dynamicPaginate();
+
+        if ($department->isEmpty()) {
+            return $this->responseNotFound("Nothing to display.");
+        }
+
+        return $this->responseSuccess(ResponseMessage::DISPLAY, $department);
+    }
     public function show($id)
     {
         $department = Department::find($id);
