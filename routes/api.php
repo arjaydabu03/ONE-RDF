@@ -40,6 +40,12 @@ Route::middleware("api.key")->group(function () {
         AccountTitleController::class,
         "account_title_api",
     ]);
+    Route::get("companies", [CompanyController::class, "index"]);
+    Route::get("business_unit", [BusinessUnitController::class, "index"]);
+    Route::get("departments", [DepartmentController::class, "index"]);
+    Route::get("department_unit", [DepartmentUnitController::class, "index"]);
+    Route::get("sub_unit", [SubUnitController::class, "index"]);
+    Route::get("location", [LocationController::class, "index"]);
 });
 
 Route::group(["middleware" => ["auth:sanctum"]], function () {
