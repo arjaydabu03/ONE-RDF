@@ -55,9 +55,6 @@ class CompanyController extends Controller
             return $this->responseNotFound("Nothing to display.");
         }
 
-        // foreach (Company::lazy() as $companies) {
-        //     $companies = Company::get();
-        // }
         return $this->responseSuccess(ResponseMessage::DISPLAY, $companies);
     }
     public function show($id)

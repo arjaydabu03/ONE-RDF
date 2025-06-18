@@ -35,23 +35,23 @@ use App\Http\Controllers\Api\FinancialStatementController;
 */
 // api outside
 Route::middleware("api.key")->group(function () {
+    Route::get("companies_api", [CompanyController::class, "companies"]);
+    Route::get("business_unit_api", [
+        BusinessUnitController::class,
+        "business_unit",
+    ]);
+    Route::get("departments_api", [DepartmentController::class, "departments"]);
+    Route::get("department_unit_api", [
+        DepartmentUnitController::class,
+        "department_unit",
+    ]);
+    Route::get("sub_unit_api", [SubUnitController::class, "sub_unit"]);
+    Route::get("location_api", [LocationController::class, "location"]);
     Route::get("charging_api", [ChargingController::class, "charging_api"]);
     Route::get("account_title_external", [
         AccountTitleController::class,
         "account_title_api",
     ]);
-    Route::get("companies", [CompanyController::class, "companies"]);
-    Route::get("business_unit", [
-        BusinessUnitController::class,
-        "business_unit",
-    ]);
-    Route::get("departments", [DepartmentController::class, "departments"]);
-    Route::get("department_unit", [
-        DepartmentUnitController::class,
-        "department_unit",
-    ]);
-    Route::get("sub_unit", [SubUnitController::class, "sub_unit"]);
-    Route::get("location", [LocationController::class, "location"]);
 });
 
 Route::group(["middleware" => ["auth:sanctum"]], function () {
