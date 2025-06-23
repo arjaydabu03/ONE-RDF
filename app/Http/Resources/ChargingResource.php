@@ -25,7 +25,7 @@ class ChargingResource extends JsonResource
 
             "business_unit_id" => $this->business_unit->id,
             "business_unit_code" => $this->business_unit->code,
-            "business_unit_name" => $this->business_unit->name, 
+            "business_unit_name" => $this->business_unit->name,
 
             "department_id" => $this->department->id,
             "department_code" => $this->department->code,

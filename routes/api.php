@@ -82,6 +82,11 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::apiResource("credit", CreditController::class);
     Route::apiResource("account_title", AccountTitleController::class);
 
+    Route::post("import/accont_title", [
+        AccountTitleController::class,
+        "import",
+    ]);
+
     //password management
 
     Route::patch("change_password/{id}", [

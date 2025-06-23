@@ -144,4 +144,31 @@ class AccountTitleController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $collect);
     }
+    public function import(Request $request)
+    {
+        $import = $request->all();
+        $account_title = AccountTitle::upsert(
+            $import,
+            ["code"],
+            [
+                "name",
+                "account_group_id",
+                "account_sub_group_id",
+                "account_unit_id",
+                "account_type_id",
+                "financial_statement_id",
+                "normal_balance_id",
+                "credit_id",
+            ]
+        );
+
+        // $user_login = Auth()->user()->id;
+        // $audit_trail = AuditTrail::create([
+        //     "user_id" => $user_login,
+        //     "action" => "Create",
+        //     "module" => "AccountTitle Module",
+        //     "details" => "created account " . $request->full_name,
+        // ]);
+        return $this->responseCreated(ResponseMessage::IMPORT, $account_title);
+    }
 }
