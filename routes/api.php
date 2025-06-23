@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ChargeController;
 use App\Http\Controllers\Api\CreditController;
 use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\AccountController;
@@ -77,6 +78,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::apiResource("normal_balance", NormalBalanceController::class);
     Route::apiResource("sync_charging", ChargeSyncController::class);
     Route::apiResource("allocation", AllocationController::class);
+    Route::apiResource("charge", ChargeController::class);
     Route::apiResource(
         "financial_statement",
         FinancialStatementController::class

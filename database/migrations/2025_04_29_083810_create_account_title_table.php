@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string("financial_statement_id");
             $table->string("credit_id");
             $table->string("allocation_id");
+            $table->string("charge_id");
             $table->string("last_update_by")->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -134,7 +134,8 @@ class AccountTitleController extends Controller
             "financial_statement",
             "normal_balance",
             "credit",
-            "allocation"
+            "allocation",
+            "charge"
         )
             ->withTrashed()
             ->useFilters()

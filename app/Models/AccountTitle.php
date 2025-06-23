@@ -73,4 +73,8 @@ class AccountTitle extends Model
     {
         return $this->belongsTo(Allocation::class);
     }
+    public function charge()
+    {
+        return $this->belongsTo(Charge::class);
+    }
 }
