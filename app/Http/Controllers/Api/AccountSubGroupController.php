@@ -8,6 +8,7 @@ use App\function\ResponseMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
+use App\Http\Requests\AccountSubGroup\ImportRequest;
 
 class AccountSubGroupController extends Controller
 {
@@ -107,5 +108,18 @@ class AccountSubGroupController extends Controller
         }
 
         return $this->responseSuccess($message, $account_sub_group);
+    }
+
+    public function import(ImportRequest $request)
+    {
+        $import = $request->all();
+
+        foreach ($import as $file_import) {
+            $account_group = AccountSubGroup::create([
+                "name" => $file_import["name"],
+            ]);
+        }
+
+        return $this->responseCreated(ResponseMessage::CREATE, $import);
     }
 }

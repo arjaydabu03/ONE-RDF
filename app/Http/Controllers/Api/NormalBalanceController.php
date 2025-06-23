@@ -8,6 +8,7 @@ use App\function\ResponseMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
+use App\Http\Requests\NormalBalance\ImportRequest;
 
 class NormalBalanceController extends Controller
 {
@@ -100,5 +101,17 @@ class NormalBalanceController extends Controller
         }
 
         return $this->responseSuccess($message, $normal_balance);
+    }
+    public function import(ImportRequest $request)
+    {
+        $import = $request->all();
+
+        foreach ($import as $file_import) {
+            $financial_statement = NormalBalance::create([
+                "name" => $file_import["name"],
+            ]);
+        }
+
+        return $this->responseCreated(ResponseMessage::CREATE, $import);
     }
 }

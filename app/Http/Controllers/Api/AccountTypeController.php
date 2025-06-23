@@ -8,6 +8,7 @@ use App\function\ResponseMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
+use App\Http\Requests\AccountType\ImportRequest;
 
 class AccountTypeController extends Controller
 {
@@ -94,5 +95,17 @@ class AccountTypeController extends Controller
         }
 
         return $this->responseSuccess($message, $account_type);
+    }
+    public function import(ImportRequest $request)
+    {
+        $import = $request->all();
+
+        foreach ($import as $file_import) {
+            $account_type = AccountType::create([
+                "name" => $file_import["name"],
+            ]);
+        }
+
+        return $this->responseCreated(ResponseMessage::CREATE, $import);
     }
 }

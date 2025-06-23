@@ -140,5 +140,29 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
         ChargeSyncController::class,
         "sync_charge",
     ]);
+    Route::post("import/account_group", [
+        AccountGroupController::class,
+        "import",
+    ]);
+    Route::post("import/account_sub_group", [
+        AccountSubGroupController::class,
+        "import",
+    ]);
+    Route::post("import/account_type", [
+        AccountTypeController::class,
+        "import",
+    ]);
+    Route::post("import/account_unit", [
+        AccountUnitController::class,
+        "import",
+    ]);
+    Route::post("import/financial_statement", [
+        FinancialStatementController::class,
+        "import",
+    ]);
+     Route::post("import/normal_balance", [
+        NormalBalanceController::class,
+        "import",
+    ]);
 });
 Route::post("login", [AccountController::class, "login"]);

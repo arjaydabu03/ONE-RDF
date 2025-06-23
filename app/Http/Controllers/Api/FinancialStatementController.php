@@ -8,6 +8,7 @@ use App\Models\FinancialStatement;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
+use App\Http\Requests\FinancialStatement\ImportRequest;
 
 class FinancialStatementController extends Controller
 {
@@ -107,5 +108,17 @@ class FinancialStatementController extends Controller
         }
 
         return $this->responseSuccess($message, $financial_statement);
+    }
+    public function import(ImportRequest $request)
+    {
+        $import = $request->all();
+
+        foreach ($import as $file_import) {
+            $financial_statement = FinancialStatement::create([
+                "name" => $file_import["name"],
+            ]);
+        }
+
+        return $this->responseCreated(ResponseMessage::CREATE, $import);
     }
 }
