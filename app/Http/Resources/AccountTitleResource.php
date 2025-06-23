@@ -27,6 +27,7 @@ class AccountTitleResource extends JsonResource
             "normal_balance_name" => $this->normal_balance->name ?? null,
             "credit_code" => $this->credit->code ?? null,
             "credit_name" => $this->credit->name ?? null,
+            "allocation_name" => $this->allocation->name ?? null,
             "created_at" => $this->created_at ?? null,
             "updated_at" => $this->updated_at ?? null,
             "deleted_at" => $this->deleted_at ?? null,

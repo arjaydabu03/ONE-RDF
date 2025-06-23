@@ -10,18 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("account_title", function (Blueprint $table) {
+        Schema::create("allocation", function (Blueprint $table) {
             $table->increments("id");
-            $table->string("code");
             $table->string("name");
-            $table->string("account_group_id");
-            $table->string("account_sub_group_id");
-            $table->string("account_unit_id");
-            $table->string("account_type_id");
-            $table->string("normal_balance_id");
-            $table->string("financial_statement_id");
-            $table->string("credit_id");
-            $table->string("allocation_id");
             $table->string("last_update_by")->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -33,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists("account_title");
+        Schema::dropIfExists("allocation");
     }
 };

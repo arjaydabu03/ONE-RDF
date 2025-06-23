@@ -26,6 +26,7 @@ class AccountTitle extends Model
         "financial_statement_id",
         "normal_balance_id",
         "credit_id",
+        "allocation_id",
         "last_updated_by",
     ];
 
@@ -37,6 +38,7 @@ class AccountTitle extends Model
         "financial_statement_id",
         "normal_balance_id",
         "credit_id",
+        "allocation_id",
     ];
 
     public function account_group()
@@ -66,5 +68,9 @@ class AccountTitle extends Model
     public function credit()
     {
         return $this->belongsTo(Credit::class);
+    }
+    public function allocation()
+    {
+        return $this->belongsTo(Allocation::class);
     }
 }

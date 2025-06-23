@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\SubUnitController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ChargingController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\AllocationController;
 use App\Http\Controllers\Api\ChargeSyncController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\AccountTypeController;
@@ -75,6 +76,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::apiResource("account_unit", AccountUnitController::class);
     Route::apiResource("normal_balance", NormalBalanceController::class);
     Route::apiResource("sync_charging", ChargeSyncController::class);
+    Route::apiResource("allocation", AllocationController::class);
     Route::apiResource(
         "financial_statement",
         FinancialStatementController::class

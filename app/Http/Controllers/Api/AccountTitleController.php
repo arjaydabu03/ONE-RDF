@@ -23,7 +23,8 @@ class AccountTitleController extends Controller
             "account_type",
             "financial_statement",
             "normal_balance",
-            "credit"
+            "credit",
+            "allocation"
         )
             ->when($status === "inactive", function ($query) use ($status) {
                 return $query->onlyTrashed();
@@ -59,6 +60,7 @@ class AccountTitleController extends Controller
             "financial_statement_id" => $request->financial_statement_id,
             "normal_balance_id" => $request->normal_balance_id,
             "credit_id" => $request->credit_id,
+            "allocation_id" => $request->allocation_id,
         ]);
 
         // $user_login = Auth()->user()->id;
@@ -88,6 +90,7 @@ class AccountTitleController extends Controller
             "financial_statement_id" => $request->financial_statement_id,
             "normal_balance_id" => $request->normal_balance_id,
             "credit_id" => $request->credit_id,
+            "allocation_id" => $request->allocation_id,
             // "last_update_by" => Auth::user()->full_name,
         ]);
 
@@ -130,7 +133,8 @@ class AccountTitleController extends Controller
             "account_type",
             "financial_statement",
             "normal_balance",
-            "credit"
+            "credit",
+            "allocation"
         )
             ->withTrashed()
             ->useFilters()
@@ -159,6 +163,7 @@ class AccountTitleController extends Controller
                 "financial_statement_id",
                 "normal_balance_id",
                 "credit_id",
+                "allocation_id",
             ]
         );
 
