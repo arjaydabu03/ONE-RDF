@@ -86,7 +86,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::apiResource("credit", CreditController::class);
     Route::apiResource("account_title", AccountTitleController::class);
 
-    Route::post("import/accont_title", [
+    Route::post("import/account_title", [
         AccountTitleController::class,
         "import",
     ]);
@@ -160,9 +160,12 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
         FinancialStatementController::class,
         "import",
     ]);
-     Route::post("import/normal_balance", [
+    Route::post("import/normal_balance", [
         NormalBalanceController::class,
         "import",
     ]);
+    Route::post("import/credit", [CreditController::class, "import"]);
+    Route::post("import/allocation", [AllocationController::class, "import"]);
+    Route::post("import/charge", [ChargeController::class, "import"]);
 });
 Route::post("login", [AccountController::class, "login"]);

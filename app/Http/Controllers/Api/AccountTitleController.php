@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
 use App\Http\Resources\AccountTitleResource;
+use App\Http\Resources\AccountTitleViewResource;
+use App\Http\Requests\AccountTitle\ImportRequest;
 
 class AccountTitleController extends Controller
 {
@@ -24,7 +26,8 @@ class AccountTitleController extends Controller
             "financial_statement",
             "normal_balance",
             "credit",
-            "allocation"
+            "allocation",
+            "charge"
         )
             ->when($status === "inactive", function ($query) use ($status) {
                 return $query->onlyTrashed();
@@ -35,6 +38,8 @@ class AccountTitleController extends Controller
         if ($account_title->isEmpty()) {
             return $this->responseNotFound("Nothing to display.");
         }
+
+        // AccountTitleViewResource::collection($account_title);
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $account_title);
     }
@@ -149,7 +154,7 @@ class AccountTitleController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $collect);
     }
-    public function import(Request $request)
+    public function import(ImportRequest $request)
     {
         $import = $request->all();
         $account_title = AccountTitle::upsert(
@@ -165,6 +170,7 @@ class AccountTitleController extends Controller
                 "normal_balance_id",
                 "credit_id",
                 "allocation_id",
+                "charge_id",
             ]
         );
 

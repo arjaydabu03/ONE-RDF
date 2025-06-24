@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
 use App\Http\Requests\Charge\StoreRequest;
+use App\Http\Requests\Charge\ImportRequest;
 
 class ChargeController extends Controller
 {
@@ -93,5 +94,18 @@ class ChargeController extends Controller
         }
 
         return $this->responseSuccess($message, $charge);
+    }
+
+    public function import(ImportRequest $request)
+    {
+        $import = $request->all();
+
+        foreach ($import as $file_import) {
+            $charge = Charge::create([
+                "name" => $file_import["name"],
+            ]);
+        }
+
+        return $this->responseCreated(ResponseMessage::CREATE, $import);
     }
 }

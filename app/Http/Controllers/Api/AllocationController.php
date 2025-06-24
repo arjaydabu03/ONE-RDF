@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
 use App\Http\Requests\Allocation\StoreRequest;
+use App\Http\Requests\Allocation\ImportRequest;
 
 class AllocationController extends Controller
 {
@@ -95,5 +96,17 @@ class AllocationController extends Controller
         }
 
         return $this->responseSuccess($message, $allocation);
+    }
+    public function import(ImportRequest $request)
+    {
+        $import = $request->all();
+
+        foreach ($import as $file_import) {
+            $allocation = Allocation::create([
+                "name" => $file_import["name"],
+            ]);
+        }
+
+        return $this->responseCreated(ResponseMessage::CREATE, $import);
     }
 }

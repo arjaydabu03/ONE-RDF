@@ -27,6 +27,7 @@ class AccountTitle extends Model
         "normal_balance_id",
         "credit_id",
         "allocation_id",
+        "charge_id",
         "last_updated_by",
     ];
 

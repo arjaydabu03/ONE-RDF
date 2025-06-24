@@ -8,6 +8,7 @@ use App\function\ResponseMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
+use App\Http\Requests\Credit\ImportRequest;
 
 class CreditController extends Controller
 {
@@ -16,9 +17,9 @@ class CreditController extends Controller
     {
         $status = $request->status;
 
-        $credit = Credit::when($status === "inactive", function (
-            $query
-        ) use ($status) {
+        $credit = Credit::when($status === "inactive", function ($query) use (
+            $status
+        ) {
             return $query->onlyTrashed();
         })
             ->useFilters()
@@ -97,5 +98,13 @@ class CreditController extends Controller
         }
 
         return $this->responseSuccess($message, $credit);
+    }
+
+    public function import(ImportRequest $request)
+    {
+        $import = $request->all();
+        $department = Credit::upsert($import, ["code"], ["name"]);
+
+        return $this->responseSuccess("Imported Sucessfully.", $import);
     }
 }
