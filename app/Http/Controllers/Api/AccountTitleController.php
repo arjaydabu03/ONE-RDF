@@ -39,8 +39,6 @@ class AccountTitleController extends Controller
             return $this->responseNotFound("Nothing to display.");
         }
 
-        // AccountTitleViewResource::collection($account_title);
-
         return $this->responseSuccess(ResponseMessage::DISPLAY, $account_title);
     }
     public function show($id)
@@ -177,8 +175,8 @@ class AccountTitleController extends Controller
         // $user_login = Auth()->user()->id;
         // $audit_trail = AuditTrail::create([
         //     "user_id" => $user_login,
-        //     "action" => "Create",
-        //     "module" => "AccountTitle Module",
+        //     "action" => "Import",
+        //     "module" => "Account Title Module",
         //     "details" => "created account " . $request->full_name,
         // ]);
         return $this->responseCreated(ResponseMessage::IMPORT, $account_title);
