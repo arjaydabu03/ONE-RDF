@@ -12,8 +12,9 @@ return new class extends Migration {
     {
         Schema::create("charge_sync", function (Blueprint $table) {
             $table->increments("id");
+            $table->string("system_name");
             $table->string("url_holder");
-            $table->string("token");
+            $table->longText("token");
             $table->string("last_update_by")->nullable();
             $table->timestamps();
             $table->softDeletes();

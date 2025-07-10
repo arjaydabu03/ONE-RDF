@@ -16,5 +16,5 @@ class ChargeSync extends Model
 
     protected $table = "charge_sync";
 
-    protected $fillable = ["url_holder", "token", "last_updated_by"];
+    protected $fillable = ["system_name","url_holder", "token", "last_updated_by"];
 }

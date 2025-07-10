@@ -140,6 +140,8 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
         ChargeSyncController::class,
         "sync_charge",
     ]);
+
+    Route::get("sync_c_sharp", [ChargeSyncController::class, "sync_c_sharp"]);
     Route::post("import/account_group", [
         AccountGroupController::class,
         "import",

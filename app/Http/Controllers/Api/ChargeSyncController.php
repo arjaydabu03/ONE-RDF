@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use GuzzleHttp\Client;
 use App\Models\ChargeSync;
 use Illuminate\Http\Request;
 use App\function\ResponseMessage;
@@ -44,6 +45,7 @@ class ChargeSyncController extends Controller
     public function store(Request $request)
     {
         $charge_sync = ChargeSync::create([
+            "system_name" => $request->system_name,
             "url_holder" => $request->url_holder,
             "token" => $request->token,
         ]);
@@ -66,6 +68,7 @@ class ChargeSyncController extends Controller
         }
 
         $charge_sync->update([
+            "system_name" => $request->system_name,
             "url_holder" => $request->url_holder,
             "token" => $request->token,
             // "last_update_by" => Auth::user()->full_name,
@@ -144,10 +147,9 @@ class ChargeSyncController extends Controller
             ];
         }
 
-        $sync = Http::withToken($system->token)->post(
-            $system->url_holder,
-            $payload
-        );
+        $sync = Http::withOptions(["verify" => false])
+            ->withHeaders(["api-key" => $system->token])
+            ->post($system->url_holder, $payload);
 
         if ($sync->failed()) {
             return $this->responseConflictError(ResponseMessage::SERVER);
