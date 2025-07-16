@@ -64,6 +64,7 @@ class AccountTitleController extends Controller
             "normal_balance_id" => $request->normal_balance_id,
             "credit_id" => $request->credit_id,
             "allocation_id" => $request->allocation_id,
+            "charge" => $request->charge,
         ]);
 
         // $user_login = Auth()->user()->id;
@@ -94,6 +95,7 @@ class AccountTitleController extends Controller
             "normal_balance_id" => $request->normal_balance_id,
             "credit_id" => $request->credit_id,
             "allocation_id" => $request->allocation_id,
+            "charge" => $request->charge,
             // "last_update_by" => Auth::user()->full_name,
         ]);
 
