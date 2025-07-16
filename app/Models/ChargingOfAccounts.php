@@ -40,15 +40,27 @@ class ChargingOfAccounts extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, "company_id", "id");
+        return $this->belongsTo(
+            Company::class,
+            "company_id",
+            "id"
+        )->withTrashed();
     }
     public function business_unit()
     {
-        return $this->belongsTo(BusinessUnit::class, "business_unit_id", "id");
+        return $this->belongsTo(
+            BusinessUnit::class,
+            "business_unit_id",
+            "id"
+        )->withTrashed();
     }
     public function department()
     {
-        return $this->belongsTo(Department::class, "department_id", "id");
+        return $this->belongsTo(
+            Department::class,
+            "department_id",
+            "id"
+        )->withTrashed();
     }
     public function department_unit()
     {
@@ -56,7 +68,7 @@ class ChargingOfAccounts extends Model
             DepartmentUnit::class,
             "department_unit_id",
             "id"
-        );
+        )->withTrashed();
     }
     public function sub_unit()
     {
@@ -68,6 +80,10 @@ class ChargingOfAccounts extends Model
     }
     public function location()
     {
-        return $this->belongsTo(Location::class, "location_id", "id");
+        return $this->belongsTo(
+            Location::class,
+            "location_id",
+            "id"
+        )->withTrashed();
     }
 }
