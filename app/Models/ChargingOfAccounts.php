@@ -60,7 +60,11 @@ class ChargingOfAccounts extends Model
     }
     public function sub_unit()
     {
-        return $this->belongsTo(SubUnit::class, "sub_unit_id", "id");
+        return $this->belongsTo(
+            SubUnit::class,
+            "sub_unit_id",
+            "id"
+        )->withTrashed();
     }
     public function location()
     {
