@@ -118,7 +118,9 @@ class ChargeSyncController extends Controller
             "department_unit",
             "sub_unit",
             "location"
-        )->get();
+        )
+            ->withTrashed()
+            ->get();
 
         foreach ($charging as $charging_sync) {
             $payload[] = [
@@ -143,7 +145,7 @@ class ChargeSyncController extends Controller
                 "location_id" => $charging_sync->location->id,
                 "location_code" => $charging_sync->location->code,
                 "location_name" => $charging_sync->location->name,
-                "deleted_at" => $charging_sync->deleted_at,
+                "deleted_at" => date($charging_sync->deleted_at),
             ];
         }
 
