@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Models\AuditTrail;
+use App\Models\UserSystem;
 use Illuminate\Http\Request;
 use App\function\ResponseMessage;
 use App\Http\Controllers\Controller;
@@ -23,9 +24,10 @@ class AccountController extends Controller
     public function index(StatusRequest $request)
     {
         $status = $request->status;
-        $users = User::when($status === "inactive", function ($query) {
-            $query->onlyTrashed();
-        })
+        $users = User::with("user_system.system")
+            ->when($status === "inactive", function ($query) {
+                $query->onlyTrashed();
+            })
             ->useFilters()
             ->dynamicPaginate();
 
@@ -50,12 +52,28 @@ class AccountController extends Controller
     {
         $access_permission = $request->access_permission;
         $accessConvertedToString = implode(",", $access_permission);
-        $user = User::create([
+
+        $system = $request->systems;
+        $user = new User([
             "full_name" => $request->full_name,
+            "charging_id" => $request->charging_id,
+            "charging_code" => $request->charging_code,
+            "charging_name" => $request->charging_name,
             "username" => $request->username,
             "password" => Hash::make($request->password),
             "access_permission" => $accessConvertedToString,
         ]);
+
+        $user->save();
+
+        foreach ($system as $login_system) {
+            $company_name = $login_system["system_id"];
+
+            $tag = UserSystem::create([
+                "system_id" => $login_system->system_id,
+                "user_id" => $user->id,
+            ]);
+        }
         // $user_login = Auth()->user()->id;
         // $audit_trail = AuditTrail::create([
         //     "user_id" => $user_login,
@@ -77,12 +95,43 @@ class AccountController extends Controller
         if (!$user) {
             return $this->responseNotFound("Nothing to display.");
         }
+
+        $system = $request["systems"];
+        $newTagged = collect($system)
+            ->pluck("system_id")
+            ->toArray();
+
+        $currentTagged = UserSystem::where("user_id", $id)
+            ->get()
+            ->pluck("system_id")
+            ->toArray();
+
+        foreach ($currentTagged as $system_id) {
+            if (!in_array($system_id, $newTagged)) {
+                UserSystem::where("user_id", $id)
+                    ->where("system_id", $system_id)
+                    ->delete();
+            }
+        }
+
+        foreach ($system as $key => $value) {
+            if (!in_array($value["system_id"], $currentTagged)) {
+                UserSystem::create([
+                    "user_id" => $user->id,
+                    "system_id" => $system[$key]["system_id"],
+                ]);
+            }
+        }
         $user->update([
             "full_name" => $request->full_name,
+            "charging_id" => $request->charging_id,
+            "charging_code" => $request->charging_code,
+            "charging_name" => $request->charging_name,
             "username" => $request->username,
             "access_permission" => $accessConvertedToString,
             // "last_update_by" => Auth::user()->full_name,
         ]);
+
         $user_collect = new AccountResource($user);
         return $this->responseSuccess(ResponseMessage::UPDATE, $user_collect);
     }

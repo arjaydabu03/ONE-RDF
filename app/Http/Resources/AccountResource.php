@@ -17,6 +17,12 @@ class AccountResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->full_name,
+            "charging" => [
+                "id" => $this->charging_id,
+                "code" => $this->charging_code,
+                "name" => $this->charging_name,
+            ],
+            "user_system" => $this->user_system,
             "username" => $this->username,
             "access_permission" => explode(",", $this->access_permission),
             "updated_at" => $this->updated_at,

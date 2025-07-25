@@ -19,6 +19,9 @@ class User extends Authenticatable
 
     protected $fillable = [
         "full_name",
+        "charging_id",
+        "charging_code",
+        "charging_name",
         "username",
         "password",
         "access_permission",
@@ -26,4 +29,9 @@ class User extends Authenticatable
     ];
 
     protected $hidden = ["password", "remember_token"];
+
+    public function user_system()
+    {
+        return $this->hasMany(UserSystem::class);
+    }
 }

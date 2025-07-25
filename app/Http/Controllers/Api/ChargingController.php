@@ -59,7 +59,7 @@ class ChargingController extends Controller
 
     public function store(StoreRequest $request)
     {
-        return $charging = ChargingOfAccounts::create([
+        $charging = ChargingOfAccounts::create([
             "code" => $request->code,
             "name" => $request->name,
             "company_id" => $request->company_id,

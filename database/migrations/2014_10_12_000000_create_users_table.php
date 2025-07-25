@@ -15,6 +15,9 @@ return new class extends Migration {
             $table->string("full_name");
             $table->string("username")->unique();
             $table->string("password");
+            $table->string("charging_id");
+            $table->string("charging_code");
+            $table->string("charging_name");
             $table->longText("access_permission");
             $table->string("last_update_by")->nullable();
             $table->rememberToken();

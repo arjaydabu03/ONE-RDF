@@ -18,10 +18,11 @@ class LoginResource extends JsonResource
             "id" => $this->id,
             "name" => $this->full_name,
             "username" => $this->username,
+            "user_system" => $this->user_system,
             "access_permission" => explode(",", $this->access_permission),
             "token" => $this->token,
             "updated_at" => $this->updated_at,
-            "deleted_at" => $this->deleted_at,
+            "deleted_at" => $this->deleted_at,  
         ];
     }
 }
