@@ -149,7 +149,11 @@ class ChargeSyncController extends Controller
             ];
         }
 
-        $sync = Http::withOptions(["verify" => false, "timeout" => 120])
+        $sync = Http::withOptions([
+            "verify" => false,
+            "timeout" => 120,
+            "connect_timeout" => 30,
+        ])
             ->withHeaders(["api-key" => $system->token])
             ->post($system->url_holder, $payload);
 
