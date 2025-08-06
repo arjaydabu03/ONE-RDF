@@ -176,7 +176,7 @@ class AccountController extends Controller
         return $this->responseSuccess("Login Success", $user)->withCookie(
             $cookie
         );
-    }
+    }   
     public function logout(Request $request)
     {
         Auth()
