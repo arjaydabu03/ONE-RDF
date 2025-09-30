@@ -16,11 +16,10 @@ class RegionController extends Controller
     {
         $status = $request->status;
 
-        $region = Region::when($status === "inactive", function ($query) use (
-            $status
-        ) {
-            return $query->onlyTrashed();
-        })
+        $region = Region::with("province")
+            ->when($status === "inactive", function ($query) use ($status) {
+                return $query->onlyTrashed();
+            })
             ->useFilters()
             ->dynamicPaginate();
 

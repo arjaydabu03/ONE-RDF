@@ -16,12 +16,10 @@ class CityMunicipalityController extends Controller
     {
         $status = $request->status;
 
-        $city_municipality = CityMunicipality::when(
-            $status === "inactive",
-            function ($query) use ($status) {
+        $city_municipality = CityMunicipality::with("province")
+            ->when($status === "inactive", function ($query) use ($status) {
                 return $query->onlyTrashed();
-            }
-        )
+            })
             ->useFilters()
             ->dynamicPaginate();
 

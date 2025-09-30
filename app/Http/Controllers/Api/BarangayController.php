@@ -16,12 +16,10 @@ class BarangayController extends Controller
     {
         $status = $request->status;
 
-        $barangay = Barangay::when(
-            $status === "inactive",
-            function ($query) use ($status) {
+        $barangay = Barangay::with("city_municipality")
+            ->when($status === "inactive", function ($query) use ($status) {
                 return $query->onlyTrashed();
-            }
-        )
+            })
             ->useFilters()
             ->dynamicPaginate();
 
@@ -29,9 +27,6 @@ class BarangayController extends Controller
             return $this->responseNotFound("Nothing to display.");
         }
 
-        return $this->responseSuccess(
-            ResponseMessage::DISPLAY,
-            $barangay
-        );
+        return $this->responseSuccess(ResponseMessage::DISPLAY, $barangay);
     }
 }

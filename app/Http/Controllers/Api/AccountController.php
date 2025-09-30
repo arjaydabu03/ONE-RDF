@@ -67,10 +67,8 @@ class AccountController extends Controller
         $user->save();
 
         foreach ($system as $login_system) {
-            $company_name = $login_system["system_id"];
-
             $tag = UserSystem::create([
-                "system_id" => $login_system->system_id,
+                "system_id" => $login_system["system_id"],
                 "user_id" => $user->id,
             ]);
         }
@@ -127,7 +125,6 @@ class AccountController extends Controller
             "charging_id" => $request->charging_id,
             "charging_code" => $request->charging_code,
             "charging_name" => $request->charging_name,
-            "username" => $request->username,
             "access_permission" => $accessConvertedToString,
             // "last_update_by" => Auth::user()->full_name,
         ]);
@@ -176,7 +173,7 @@ class AccountController extends Controller
         return $this->responseSuccess("Login Success", $user)->withCookie(
             $cookie
         );
-    }   
+    }
     public function logout(Request $request)
     {
         Auth()

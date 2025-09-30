@@ -29,6 +29,11 @@ class Region extends Model
 
     protected string $default_filters = RegionFilter::class;
 
+    public function province()
+    {
+        return $this->hasMany(Province::class, "region_id", "psgc_id");
+    }
+
     protected function casts(): array
     {
         return [

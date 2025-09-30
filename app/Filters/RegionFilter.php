@@ -8,5 +8,9 @@ class RegionFilter extends QueryFilters
 {
     protected array $allowedFilters = [];
 
-    protected array $columnSearch = ["psgc_id"];
+    protected array $columnSearch = ["psgc_id", "name"];
+
+    protected array $relationSearch = [
+        "province" => ["psgc_id", "name"],
+    ];
 }

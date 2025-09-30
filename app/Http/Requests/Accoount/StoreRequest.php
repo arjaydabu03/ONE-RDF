@@ -23,7 +23,12 @@ class StoreRequest extends FormRequest
     {
         return [
             "full_name" => "required",
-            "username" => "required",
+            "username" => [
+                "required",
+                $this->route()->user
+                    ? "unique:users,username," . $this->route()->user
+                    : "unique:users,username",
+            ],
             "password" => "required",
             "access_permission" => "required",
         ];
