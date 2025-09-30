@@ -4,13 +4,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ChargeController;
 use App\Http\Controllers\Api\CreditController;
+use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\SystemController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\SubUnitController;
+use App\Http\Controllers\Api\BarangayController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ChargingController;
+use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\ProvinceController;
 use App\Http\Controllers\Api\AllocationController;
 use App\Http\Controllers\Api\ChargeSyncController;
 use App\Http\Controllers\Api\DepartmentController;
@@ -23,6 +27,8 @@ use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\NormalBalanceController;
 use App\Http\Controllers\Api\DepartmentUnitController;
 use App\Http\Controllers\Api\AccountSubGroupController;
+use App\Http\Controllers\Api\SubMunicipalityController;
+use App\Http\Controllers\Api\CityMunicipalityController;
 use App\Http\Controllers\Api\FinancialStatementController;
 
 /*
@@ -85,6 +91,12 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     );
     Route::apiResource("credit", CreditController::class);
     Route::apiResource("account_title", AccountTitleController::class);
+    Route::apiResource("customer", CustomerController::class);
+    Route::apiResource("region", RegionController::class);
+    Route::apiResource("province", ProvinceController::class);
+    Route::apiResource("city_municipality", CityMunicipalityController::class);
+    Route::apiResource("sub_municipality", SubMunicipalityController::class);
+    Route::apiResource("barangay", BarangayController::class);
 
     Route::post("import/account_title", [
         AccountTitleController::class,

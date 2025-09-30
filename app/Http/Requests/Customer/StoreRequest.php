@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Department;
+namespace App\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,10 +25,9 @@ class StoreRequest extends FormRequest
             "name" => "required",
             "code" => [
                 "required",
-                $this->route()->department
-                    ? "unique:department,department," .
-                        $this->route()->department
-                    : "unique:department,code",
+                $this->route()->customer
+                    ? "unique:customer,code," . $this->route()->customer
+                    : "unique:customer,code",
             ],
         ];
     }
