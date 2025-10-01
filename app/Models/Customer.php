@@ -17,6 +17,7 @@ class Customer extends Model
     protected string $default_filters = CustomerFilters::class;
 
     protected $fillable = [
+        "sync_id",
         "code",
         "name",
         "business_name",

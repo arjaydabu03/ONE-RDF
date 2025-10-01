@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create("customer", function (Blueprint $table) {
             $table->increments("id");
+            $table->unsignedInteger("sync_id")->unique();
             $table->string("code");
             $table->string("name");
             $table->string("business_name");

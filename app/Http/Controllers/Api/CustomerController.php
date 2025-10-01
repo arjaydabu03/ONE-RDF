@@ -126,13 +126,14 @@ class CustomerController extends Controller
         return $this->responseSuccess($message, $customer);
     }
 
-    public function import(ImportRequest $request)
+    public function import(Request $request)
     {
         $import = $request->all();
         $department = Customer::upsert(
             $import,
-            ["code"],
+            ["sync_id"],
             [
+                "code",
                 "name",
                 "business_name",
                 "registration_status",
