@@ -16,5 +16,22 @@ class Customer extends Model
 
     protected string $default_filters = CustomerFilters::class;
 
-    protected $fillable = ["code", "name", "last_updated_by"];
+    protected $fillable = [
+        "code",
+        "name",
+        "business_name",
+        "registration_status",
+        "contact_no",
+        "email_address",
+        "house_no",
+        "street_name",
+        "barangay_name",
+        "city",
+        "province",
+        "customer_type",
+        "cluster_id",
+        "cluster_name",
+        "terms",
+        "last_updated_by",
+    ];
 }

@@ -46,6 +46,19 @@ class CustomerController extends Controller
         $customer = Customer::create([
             "code" => $request->code,
             "name" => $request->name,
+            "business_name" => $request->business_name,
+            "registration_status" => $request->registration_status,
+            "contact_no" => $request->contact_no,
+            "email_address" => $request->email_address,
+            "house_no" => $request->house_no,
+            "street_name" => $request->street_name,
+            "barangay_name" => $request->barangay_name,
+            "city" => $request->city,
+            "province" => $request->province,
+            "customer_type" => $request->customer_type,
+            "cluster_id" => $request->cluster_id,
+            "cluster_name" => $request->cluster_nameame,
+            "terms" => $request->terms,
         ]);
 
         // $user_login = Auth()->user()->id;
@@ -68,6 +81,19 @@ class CustomerController extends Controller
         $customer->update([
             "code" => $request->code,
             "name" => $request->name,
+            "business_name" => $request->business_name,
+            "registration_status" => $request->registration_status,
+            "contact_no" => $request->contact_no,
+            "email_address" => $request->email_address,
+            "house_no" => $request->house_no,
+            "street_name" => $request->street_name,
+            "barangay_name" => $request->barangay_name,
+            "city" => $request->city,
+            "province" => $request->province,
+            "customer_type" => $request->customer_type,
+            "cluster_id" => $request->cluster_id,
+            "cluster_name" => $request->cluster_nameame,
+            "terms" => $request->terms,
             // "last_update_by" => Auth::user()->full_name,
         ]);
 
