@@ -129,7 +129,26 @@ class CustomerController extends Controller
     public function import(ImportRequest $request)
     {
         $import = $request->all();
-        $department = Customer::upsert($import, ["code"], ["name"]);
+        $department = Customer::upsert(
+            $import,
+            ["code"],
+            [
+                "name",
+                "business_name",
+                "registration_status",
+                "contact_no",
+                "email_address",
+                "house_no",
+                "street_name",
+                "barangay_name",
+                "city",
+                "province",
+                "customer_type",
+                "cluster_id",
+                "cluster_name",
+                "terms",
+            ]
+        );
 
         return $this->responseSuccess("Imported Sucessfully.", $import);
     }
