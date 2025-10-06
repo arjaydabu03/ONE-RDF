@@ -139,24 +139,26 @@ class CustomerController extends Controller
         $collect = $sync["value"];
 
         foreach ($collect as $arcana) {
-            $customer = Customer::create([
-                "sync_id" => $arcana["id"],
-                "code" => $arcana["id"],
-                "name" => $arcana["fullName"],
-                "business_name" => $arcana["businessName"],
-                "registration_status" => $arcana["registrationStatus"],
-                "contact_no" => $arcana["phoneNumber"],
-                "email_address" => $arcana["emailAddress"],
-                "house_no" => $arcana["ownersAddress"]["houseNumber"],
-                "street_name" => $arcana["ownersAddress"]["streetName"],
-                "barangay_name" => $arcana["ownersAddress"]["barangayName"],
-                "city" => $arcana["ownersAddress"]["city"],
-                "province" => $arcana["ownersAddress"]["province"],
-                "customer_type" => $arcana["customerType"],
-                "cluster_id" => $arcana["clusterId"],
-                "cluster_name" => $arcana["clusterName"],
-                "terms" => $arcana["terms"],
-            ]);
+            $customer = Customer::updateOrCreate(
+                ["sync_id" => $arcana["id"]],
+                [
+                    "code" => $arcana["id"],
+                    "name" => $arcana["fullName"],
+                    "business_name" => $arcana["businessName"],
+                    "registration_status" => $arcana["registrationStatus"],
+                    "contact_no" => $arcana["phoneNumber"],
+                    "email_address" => $arcana["emailAddress"],
+                    "house_no" => $arcana["ownersAddress"]["houseNumber"],
+                    "street_name" => $arcana["ownersAddress"]["streetName"],
+                    "barangay_name" => $arcana["ownersAddress"]["barangayName"],
+                    "city" => $arcana["ownersAddress"]["city"],
+                    "province" => $arcana["ownersAddress"]["province"],
+                    "customer_type" => $arcana["customerType"],
+                    "cluster_id" => $arcana["clusterId"],
+                    "cluster_name" => $arcana["clusterName"],
+                    "terms" => $arcana["terms"],
+                ]
+            );
         }
 
         return $this->responseSuccess("Imported Sucessfully.", $collect);
