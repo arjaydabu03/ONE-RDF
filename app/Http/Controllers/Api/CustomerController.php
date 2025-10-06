@@ -8,6 +8,7 @@ use App\function\ResponseMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusRequest;
 use Essa\APIToolKit\Api\ApiResponse;
+use Illuminate\Support\Facades\Http;
 use App\Http\Requests\Customer\StoreRequest;
 
 class CustomerController extends Controller
@@ -126,31 +127,38 @@ class CustomerController extends Controller
         return $this->responseSuccess($message, $customer);
     }
 
-    public function import(Request $request)
+    public function sync_arcana(Request $request)
     {
-        $import = $request->all();
-        $department = Customer::upsert(
-            $import,
-            ["sync_id"],
-            [
-                "code",
-                "name",
-                "business_name",
-                "registration_status",
-                "contact_no",
-                "email_address",
-                "house_no",
-                "street_name",
-                "barangay_name",
-                "city",
-                "province",
-                "customer_type",
-                "cluster_id",
-                "cluster_name",
-                "terms",
-            ]
-        );
+        //API Arcana to integrate
+        $sync = Http::withOptions(["verify" => false])
+            ->withHeaders([
+                "x-api-key" => env("API_KEY_ARCANA"),
+            ])
+            ->get("https://api-arcana.rdfmis.com/api/ClientsForSync");
 
-        return $this->responseSuccess("Imported Sucessfully.", $import);
+        $collect = $sync["value"];
+
+        foreach ($collect as $arcana) {
+            $customer = Customer::create([
+                "sync_id" => $arcana["id"],
+                "code" => $arcana["id"],
+                "name" => $arcana["fullName"],
+                "business_name" => $arcana["businessName"],
+                "registration_status" => $arcana["registrationStatus"],
+                "contact_no" => $arcana["phoneNumber"],
+                "email_address" => $arcana["emailAddress"],
+                "house_no" => $arcana["ownersAddress"]["houseNumber"],
+                "street_name" => $arcana["ownersAddress"]["streetName"],
+                "barangay_name" => $arcana["ownersAddress"]["barangayName"],
+                "city" => $arcana["ownersAddress"]["city"],
+                "province" => $arcana["ownersAddress"]["province"],
+                "customer_type" => $arcana["customerType"],
+                "cluster_id" => $arcana["clusterId"],
+                "cluster_name" => $arcana["clusterName"],
+                "terms" => $arcana["terms"],
+            ]);
+        }
+
+        return $this->responseSuccess("Imported Sucessfully.", $collect);
     }
 }

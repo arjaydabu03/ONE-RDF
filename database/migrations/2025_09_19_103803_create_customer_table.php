@@ -19,11 +19,11 @@ return new class extends Migration {
             $table->string("registration_status");
             $table->string("contact_no");
             $table->string("email_address")->nullable();
-            $table->string("house_no");
-            $table->string("street_name");
-            $table->string("barangay_name");
-            $table->string("city");
-            $table->string("province");
+            $table->string("house_no")->nullable();
+            $table->string("street_name")->nullable();
+            $table->string("barangay_name")->nullable();
+            $table->string("city")->nullable();
+            $table->string("province")->nullable();
             $table->string("customer_type");
             $table->string("cluster_id");
             $table->string("cluster_name");

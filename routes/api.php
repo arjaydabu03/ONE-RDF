@@ -103,6 +103,8 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
         "import",
     ]);
 
+    Route::post("sync_arcana", [CustomerController::class, "sync_arcana"]);
+
     //password management
 
     Route::patch("change_password/{id}", [
