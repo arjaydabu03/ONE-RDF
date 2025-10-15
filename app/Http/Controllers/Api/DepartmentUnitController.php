@@ -35,15 +35,10 @@ class DepartmentUnitController extends Controller
             $department_unit
         );
     }
-    public function department_unit(StatusRequest $request)
+    public function department_unit(Request $request)
     {
         $status = $request->status;
-        $department_unit = DepartmentUnit::when(
-            $status === "inactive",
-            function ($query) use ($status) {
-                return $query->onlyTrashed();
-            }
-        )
+        $department_unit = DepartmentUnit::withTrashed()
             ->useFilters()
             ->dynamicPaginate();
 

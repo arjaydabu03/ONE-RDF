@@ -37,11 +37,7 @@ class LocationController extends Controller
     public function location(StatusRequest $request)
     {
         $status = $request->status;
-        $ocation = Location::when($status === "inactive", function (
-            $query
-        ) use ($status) {
-            return $query->onlyTrashed();
-        })
+        $ocation = Location::withTrashed()
             ->useFilters()
             ->dynamicPaginate();
 

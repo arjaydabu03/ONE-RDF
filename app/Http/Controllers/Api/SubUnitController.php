@@ -31,14 +31,9 @@ class SubUnitController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $sub_unit);
     }
-    public function sub_unit(StatusRequest $request)
+    public function sub_unit(Request $request)
     {
-        $status = $request->status;
-        $sub_unit = SubUnit::when($status === "inactive", function (
-            $query
-        ) use ($status) {
-            return $query->onlyTrashed();
-        })
+        $sub_unit = SubUnit::withTrashed()
             ->useFilters()
             ->dynamicPaginate();
 

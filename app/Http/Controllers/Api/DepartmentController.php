@@ -32,14 +32,10 @@ class DepartmentController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $department);
     }
-    public function departments(StatusRequest $request)
+    public function departments(Request $request)
     {
         $status = $request->status;
-        $department = Department::when($status === "inactive", function (
-            $query
-        ) use ($status) {
-            return $query->onlyTrashed();
-        })
+        $department = Department::withTrashed()
             ->useFilters()
             ->dynamicPaginate();
 

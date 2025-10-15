@@ -39,15 +39,9 @@ class CompanyController extends Controller
         // }
         return $this->responseSuccess(ResponseMessage::DISPLAY, $companies);
     }
-    public function companies(StatusRequest $request)
+    public function companies(Request $request)
     {
-        $status = $request->status;
-
-        $companies = Company::when($status === "inactive", function (
-            $query
-        ) use ($status) {
-            return $query->onlyTrashed();
-        })
+        $companies = Company::withTrashed()
             ->useFilters()
             ->dynamicPaginate();
 

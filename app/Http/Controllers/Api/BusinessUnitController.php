@@ -34,14 +34,10 @@ class BusinessUnitController extends Controller
 
         return $this->responseSuccess(ResponseMessage::DISPLAY, $business_unit);
     }
-    public function business_unit(StatusRequest $request)
+    public function business_unit(Request $request)
     {
         $status = $request->status;
-        $business_unit = BusinessUnit::when($status === "inactive", function (
-            $query
-        ) use ($status) {
-            return $query->onlyTrashed();
-        })
+        $business_unit = BusinessUnit::withTrashed()
             ->useFilters()
             ->dynamicPaginate();
 
