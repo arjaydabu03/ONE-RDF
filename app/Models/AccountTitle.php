@@ -28,6 +28,11 @@ class AccountTitle extends Model
         "credit_id",
         "allocation_id",
         "charge_id",
+        "purchase_book",
+        "vouchers_book",
+        "cash_disbursement_book",
+        "sales_journal_book",
+        "cash_receipt_book",
         "last_updated_by",
     ];
 

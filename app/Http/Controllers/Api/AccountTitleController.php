@@ -65,6 +65,11 @@ class AccountTitleController extends Controller
             "credit_id" => $request->credit_id,
             "allocation_id" => $request->allocation_id,
             "charge" => $request->charge,
+            "purchase_book" => $request->purchase_book,
+            "vouchers_book" => $request->vouchers_book,
+            "cash_disbursement_book" => $request->cash_disbursement_book,
+            "sales_journal_book" => $request->sales_journal_book,
+            "cash_receipt_book" => $request->cash_receipt_book,
         ]);
 
         // $user_login = Auth()->user()->id;
@@ -96,6 +101,11 @@ class AccountTitleController extends Controller
             "credit_id" => $request->credit_id,
             "allocation_id" => $request->allocation_id,
             "charge" => $request->charge,
+            "purchase_book" => $request->purchase_book,
+            "vouchers_book" => $request->vouchers_book,
+            "cash_disbursement_book" => $request->cash_disbursement_book,
+            "sales_journal_book" => $request->sales_journal_book,
+            "cash_receipt_book" => $request->cash_receipt_book,
             // "last_update_by" => Auth::user()->full_name,
         ]);
 
@@ -140,7 +150,12 @@ class AccountTitleController extends Controller
             "normal_balance",
             "credit",
             "allocation",
-            "charge"
+            "charge",
+            "purchase_book",
+            "vouchers_book",
+            "cash_disbursement_book",
+            "sales_journal_book",
+            "cash_receipt_book"
         )
             ->withTrashed()
             ->useFilters()
@@ -171,6 +186,11 @@ class AccountTitleController extends Controller
                 "credit_id",
                 "allocation_id",
                 "charge_id",
+                "purchase_book",
+                "vouchers_book",
+                "cash_disbursement_book",
+                "sales_journal_book",
+                "cash_receipt_book",
             ]
         );
 

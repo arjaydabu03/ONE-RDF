@@ -55,11 +55,14 @@ class AccountController extends Controller
 
         $system = $request->systems;
         $user = new User([
-            "full_name" => $request->full_name,
-            "charging_id" => $request->charging_id,
-            "charging_code" => $request->charging_code,
-            "charging_name" => $request->charging_name,
+            "id_prefix" => $request->id_prefix,
+            "id_no" => $request->id_no,
+            "first_name" => $request->first_name,
+            "middle_name" => $request->middle_name,
+            "last_name" => $request->last_name,
+            "suffix" => $request->suffix,
             "username" => $request->username,
+            "signature" => $request->signature,
             "password" => Hash::make($request->password),
             "access_permission" => $accessConvertedToString,
         ]);
@@ -121,10 +124,15 @@ class AccountController extends Controller
             }
         }
         $user->update([
-            "full_name" => $request->full_name,
-            "charging_id" => $request->charging_id,
-            "charging_code" => $request->charging_code,
-            "charging_name" => $request->charging_name,
+            "id_prefix" => $request->id_prefix,
+            "id_no" => $request->id_no,
+            "first_name" => $request->first_name,
+            "middle_name" => $request->middle_name,
+            "last_name" => $request->last_name,
+            "suffix" => $request->suffix,
+            "username" => $request->username,
+            "signature" => $request->signature,
+            "password" => Hash::make($request->password),
             "access_permission" => $accessConvertedToString,
             // "last_update_by" => Auth::user()->full_name,
         ]);

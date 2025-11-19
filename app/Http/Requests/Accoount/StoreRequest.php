@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Accoount;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -21,8 +22,21 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id_prefix = $this->input("id_prefix");
+
         return [
-            "full_name" => "required",
+            "id_prefix" => ["required"],
+            "id_no" => [
+                "required",
+                Rule::unique("users")->where(function ($query) use (
+                    $id_prefix
+                ) {
+                    return $query->where("id_prefix", $id_prefix);
+                }),
+            ],
+            "first_name" => "required",
+            // "middle_name" => "required",
+            "last_name" => "required",
             "username" => [
                 "required",
                 $this->route()->user

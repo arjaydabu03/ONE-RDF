@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ChargeController;
 use App\Http\Controllers\Api\CreditController;
 use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\SystemController;
+use App\Http\Controllers\Api\UserSyncToSystem;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\SubUnitController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Api\ChargingController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\ProvinceController;
+use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\AllocationController;
 use App\Http\Controllers\Api\ChargeSyncController;
 use App\Http\Controllers\Api\DepartmentController;
@@ -68,6 +70,9 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::apiResource("system", SystemController::class);
     Route::apiResource("notification", NotificationController::class);
     Route::apiResource("category", CategoryController::class);
+    Route::apiResource("supplier", SupplierController::class);
+
+    Route::apiResource("sample", UserSyncToSystem::class);
 
     //Charging of accounts masterlist
     Route::apiResource("companies", CompanyController::class);

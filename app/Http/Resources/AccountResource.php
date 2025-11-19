@@ -16,14 +16,15 @@ class AccountResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->full_name,
-            "charging" => [
-                "id" => $this->charging_id,
-                "code" => $this->charging_code,
-                "name" => $this->charging_name,
-            ],
+            "id_prefix" => $this->id_prefix,
+            "id_no" => $this->id_no,
+            "first_name" => $this->first_name,
+            "middle_name" => $this->middle_name,
+            "last_name" => $this->last_name,
+            "suffix" => $this->suffix ?? null,
             "user_system" => $this->user_system,
             "username" => $this->username,
+            "signature" => $this->signature ?? null,
             "access_permission" => explode(",", $this->access_permission),
             "updated_at" => $this->updated_at,
             "deleted_at" => $this->deleted_at,

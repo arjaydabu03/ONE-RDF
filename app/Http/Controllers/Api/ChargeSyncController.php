@@ -57,6 +57,7 @@ class ChargeSyncController extends Controller
         //     "module" => "ChargeSync Module",
         //     "details" => "created account " . $request->full_name,
         // ]);
+
         return $this->responseCreated(ResponseMessage::CREATE, $charge_sync);
     }
 

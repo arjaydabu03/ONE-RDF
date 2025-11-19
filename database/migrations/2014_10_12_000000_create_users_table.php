@@ -12,12 +12,15 @@ return new class extends Migration {
     {
         Schema::create("users", function (Blueprint $table) {
             $table->increments("id");
-            $table->string("full_name");
+            $table->string("id_prefix");
+            $table->string("id_no");
+            $table->string("first_name");
+            $table->string("middle_name");
+            $table->string("last_name");
+            $table->string("suffix")->nullable();
             $table->string("username")->unique();
             $table->string("password");
-            $table->string("charging_id");
-            $table->string("charging_code");
-            $table->string("charging_name");
+            $table->longText("signature")->nullable();
             $table->longText("access_permission");
             $table->string("last_update_by")->nullable();
             $table->rememberToken();

@@ -18,12 +18,16 @@ class User extends Authenticatable
     protected string $default_filters = AccountFilters::class;
 
     protected $fillable = [
-        "full_name",
-        "charging_id",
-        "charging_code",
-        "charging_name",
+        "id",
+        "id_prefix",
+        "id_no",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "suffix",
         "username",
         "password",
+        "signature",
         "access_permission",
         "last_update_by",
     ];
