@@ -31,6 +31,7 @@ class AccountTitle extends Model
         "purchase_book",
         "vouchers_book",
         "cash_disbursement_book",
+        "journal_book",
         "sales_journal_book",
         "cash_receipt_book",
         "last_updated_by",

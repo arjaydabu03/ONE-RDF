@@ -68,6 +68,7 @@ class AccountTitleController extends Controller
             "purchase_book" => $request->purchase_book,
             "vouchers_book" => $request->vouchers_book,
             "cash_disbursement_book" => $request->cash_disbursement_book,
+            "journal_book" => $request->journal_book,
             "sales_journal_book" => $request->sales_journal_book,
             "cash_receipt_book" => $request->cash_receipt_book,
         ]);
@@ -104,6 +105,7 @@ class AccountTitleController extends Controller
             "purchase_book" => $request->purchase_book,
             "vouchers_book" => $request->vouchers_book,
             "cash_disbursement_book" => $request->cash_disbursement_book,
+            "journal_book" => $request->journal_book,
             "sales_journal_book" => $request->sales_journal_book,
             "cash_receipt_book" => $request->cash_receipt_book,
             // "last_update_by" => Auth::user()->full_name,
@@ -154,6 +156,7 @@ class AccountTitleController extends Controller
             "purchase_book",
             "vouchers_book",
             "cash_disbursement_book",
+            "journal_book",
             "sales_journal_book",
             "cash_receipt_book"
         )
@@ -189,6 +192,7 @@ class AccountTitleController extends Controller
                 "purchase_book",
                 "vouchers_book",
                 "cash_disbursement_book",
+                "journal_book",
                 "sales_journal_book",
                 "cash_receipt_book",
             ]

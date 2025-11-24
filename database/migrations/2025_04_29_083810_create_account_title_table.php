@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->string("purchase_book")->nullable();
             $table->string("vouchers_book")->nullable();
             $table->string("cash_disbursement_book")->nullable();
+            $table->string("journal_book")->nullable();
             $table->string("sales_journal_book")->nullable();
             $table->string("cash_receipt_book")->nullable();
             $table->string("last_update_by")->nullable();

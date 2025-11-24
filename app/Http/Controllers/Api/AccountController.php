@@ -132,7 +132,6 @@ class AccountController extends Controller
             "suffix" => $request->suffix,
             "username" => $request->username,
             "signature" => $request->signature,
-            "password" => Hash::make($request->password),
             "access_permission" => $accessConvertedToString,
             // "last_update_by" => Auth::user()->full_name,
         ]);
